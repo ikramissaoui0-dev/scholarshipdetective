@@ -43,16 +43,6 @@ export default function MentionsLegales() {
           </section>
 
           <section>
-            <h2 className="text-lg font-bold text-[#1A3A8F] mb-3">3. Hébergement</h2>
-            <p>Le site est hébergé par :</p>
-            <ul className="mt-3 space-y-1 pl-4">
-              <li><strong>Société :</strong> Vercel Inc.</li>
-              <li><strong>Adresse :</strong> 340 Pine Street, Suite 701, San Francisco, CA 94104, États-Unis</li>
-              <li><strong>Site web :</strong> <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-[#1A3A8F] hover:underline">vercel.com</a></li>
-            </ul>
-          </section>
-
-          <section>
             <h2 className="text-lg font-bold text-[#1A3A8F] mb-3">4. Propriété intellectuelle</h2>
             <p>
               L'ensemble du contenu de ce site (textes, images, logos, graphismes) est la propriété exclusive de Scholarship Detective SAS, sauf mention contraire. Toute reproduction, représentation, modification ou exploitation, même partielle, est strictement interdite sans autorisation préalable écrite.
