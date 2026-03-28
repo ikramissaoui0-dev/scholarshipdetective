@@ -7,7 +7,6 @@ import Services from '@/components/sections/Services';
 import HowItWorks from '@/components/sections/HowItWorks';
 import Universities from '@/components/sections/Universities';
 import Scholarships from '@/components/sections/Scholarships';
-import Testimonials from '@/components/sections/Testimonials';
 import FAQ from '@/components/sections/FAQ';
 import ContactForm from '@/components/sections/ContactForm';
 
@@ -36,9 +35,6 @@ export default function Home() {
 
         {/* S08 — Bourses Disponibles */}
         <Scholarships />
-
-        {/* S09 — Témoignages */}
-        <Testimonials />
 
         {/* S10 — FAQ */}
         <FAQ />
