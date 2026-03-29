@@ -4,11 +4,12 @@ import Link from 'next/link';
 import { getUniversityBySlug, getAllUniversitySlugs } from '@/lib/universities-data';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const uni = getUniversityBySlug(params.slug);
+  const { slug } = await params;
+  const uni = getUniversityBySlug(slug);
   if (!uni) return { title: 'Université non trouvée' };
   return {
     title: `${uni.name} (${uni.nameEn}) — Bourses & Admission | Scholarship Detective`,
@@ -26,8 +27,9 @@ export async function generateStaticParams() {
   return getAllUniversitySlugs().map((slug) => ({ slug }));
 }
 
-export default function UniversityPage({ params }: Props) {
-  const uni = getUniversityBySlug(params.slug);
+export default async function UniversityPage({ params }: Props) {
+  const { slug } = await params;
+  const uni = getUniversityBySlug(slug);
   if (!uni) notFound();
 
   return (
