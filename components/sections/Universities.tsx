@@ -1,18 +1,19 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import Link from 'next/link';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import SectionTitle from '@/components/ui/SectionTitle';
+import UniversityCard from '@/components/ui/UniversityCard';
 
 const featuredUniversities = [
-  { name: 'Université de Pékin (PKU)', city: 'Pékin', rank: '#17', specialties: ['Sciences', 'Droit', 'Économie'] },
-  { name: 'Université Tsinghua', city: 'Pékin', rank: '#25', specialties: ['Ingénierie', 'Architecture', 'Informatique'] },
-  { name: 'Shanghai Jiao Tong (SJTU)', city: 'Shanghai', rank: '#51', specialties: ['Ingénierie', 'Médecine'] },
-  { name: 'Université Fudan', city: 'Shanghai', rank: '#55', specialties: ['Médecine', 'Économie', 'Sciences'] },
-  { name: 'Université Zhejiang', city: 'Hangzhou', rank: '#67', specialties: ['Sciences', 'Agriculture', 'Tech'] },
-  { name: 'Nankai University', city: 'Tianjin', rank: '#206', specialties: ['Économie', 'Chimie', 'Mathématiques'] },
-  { name: 'Wuhan University', city: 'Wuhan', rank: '#270', specialties: ['Droit', 'Informatique', 'Sciences'] },
-  { name: "Xi'an Jiaotong University", city: "Xi'an", rank: '#325', specialties: ['Ingénierie', 'Médecine', 'Énergie'] },
+  { name: 'Université de Pékin (PKU)', city: 'Pékin', rank: '#17', specialties: ['Sciences', 'Droit', 'Économie'], slug: 'universite-pekin-pku' },
+  { name: 'Université Tsinghua', city: 'Pékin', rank: '#25', specialties: ['Ingénierie', 'Architecture', 'Informatique'], slug: 'universite-tsinghua' },
+  { name: 'Shanghai Jiao Tong (SJTU)', city: 'Shanghai', rank: '#51', specialties: ['Ingénierie', 'Médecine'], slug: undefined },
+  { name: 'Université Fudan', city: 'Shanghai', rank: '#55', specialties: ['Médecine', 'Économie', 'Sciences'], slug: 'universite-fudan-shanghai' },
+  { name: 'Université Zhejiang', city: 'Hangzhou', rank: '#67', specialties: ['Sciences', 'Agriculture', 'Tech'], slug: 'universite-zhejiang' },
+  { name: 'Nankai University', city: 'Tianjin', rank: '#206', specialties: ['Économie', 'Chimie', 'Mathématiques'], slug: undefined },
+  { name: 'Wuhan University', city: 'Wuhan', rank: '#270', specialties: ['Droit', 'Informatique', 'Sciences'], slug: undefined },
+  { name: "Xi'an Jiaotong University", city: "Xi'an", rank: '#325', specialties: ['Ingénierie', 'Médecine', 'Énergie'], slug: undefined },
 ];
 
 const row1 = [
@@ -87,9 +88,9 @@ const row2 = [
   'Shantou University', 'Southern Univ. of Science & Tech.', 'Guangdong Pharmaceutical Univ.',
   'Guangzhou Medical Univ.', 'Guangzhou Univ. of Chinese Medicine', 'Guangdong Medical Univ.',
   'Guangdong Ocean University', 'Foshan University', 'Shenzhen Technology Univ.',
-  'Xi\'an Jiaotong-Liverpool Univ.', 'Univ. of Nottingham Ningbo China', 'Duke Kunshan University',
-  'Xidian University', 'Chang\'an University', 'Northwest University',
-  'Shaanxi Normal Univ.', 'Xi\'an Univ. of Technology', 'Xi\'an Univ. of Architecture & Tech.',
+  "Xi'an Jiaotong-Liverpool Univ.", 'Univ. of Nottingham Ningbo China', 'Duke Kunshan University',
+  'Xidian University', "Chang'an University", 'Northwest University',
+  'Shaanxi Normal Univ.', "Xi'an Univ. of Technology", "Xi'an Univ. of Architecture & Tech.",
   'Nanjing Univ. of Science & Tech.', 'Shanghai Univ. of Finance & Economics',
   'Shanghai Univ. of Traditional Chinese Medicine', 'Shanghai Normal Univ.',
   'Shanghai Ocean Univ.', 'Shanghai Conservatory of Music', 'Kunming Univ. of Science & Tech.',
@@ -131,58 +132,47 @@ export default function Universities() {
           ))}
         </div>
 
-        {/* Featured universities */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        {/* Featured universities — cartes cliquables */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {featuredUniversities.map((uni, i) => (
-            <motion.article
+            <UniversityCard
               key={uni.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-30px' }}
-              transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md hover:border-[#1A3A8F] transition-all duration-300 cursor-default"
-            >
-              <h3 className="text-[#1A3A8F] font-bold text-sm leading-tight mb-1">{uni.name}</h3>
-              <p className="text-gray-400 text-xs mb-3">{uni.city}</p>
-              <span className="inline-block bg-[#E8931A] text-white text-xs rounded-full px-2 py-0.5 mb-3 font-medium">
-                QS {uni.rank}
-              </span>
-              <div className="flex flex-wrap gap-1">
-                {uni.specialties.map((spec) => (
-                  <span key={spec} className="text-gray-400 text-xs bg-gray-50 rounded px-1.5 py-0.5">
-                    {spec}
-                  </span>
-                ))}
-              </div>
-            </motion.article>
+              name={uni.name}
+              city={uni.city}
+              rank={uni.rank}
+              specialties={uni.specialties}
+              slug={uni.slug}
+              index={i}
+            />
           ))}
+        </div>
+
+        {/* Lien vers toutes les fiches */}
+        <div className="text-center mb-10">
+          <Link
+            href="/universites"
+            className="inline-flex items-center gap-2 text-[#1A3A8F] font-semibold text-sm border border-[#1A3A8F] px-5 py-2.5 rounded-xl hover:bg-[#1A3A8F] hover:text-white transition-all duration-200"
+          >
+            Voir toutes les fiches universités →
+          </Link>
         </div>
       </SectionWrapper>
 
-      {/* Scrolling ticker — full width, outside SectionWrapper */}
+      {/* Scrolling ticker */}
       <div className="mt-4 space-y-3">
-        {/* Row 1 — left to right */}
         <div className="flex overflow-hidden">
           <div className="flex gap-3 animate-marquee whitespace-nowrap">
             {allRow1.map((name, i) => (
-              <span
-                key={i}
-                className="inline-block bg-[#EEF3FF] text-[#1A3A8F] text-xs font-medium px-3 py-1.5 rounded-full border border-[#1A3A8F]/10 shrink-0"
-              >
+              <span key={i} className="inline-block bg-[#EEF3FF] text-[#1A3A8F] text-xs font-medium px-3 py-1.5 rounded-full border border-[#1A3A8F]/10 shrink-0">
                 {name}
               </span>
             ))}
           </div>
         </div>
-
-        {/* Row 2 — right to left */}
         <div className="flex overflow-hidden">
           <div className="flex gap-3 animate-marquee-reverse whitespace-nowrap">
             {allRow2.map((name, i) => (
-              <span
-                key={i}
-                className="inline-block bg-[#FFF8ED] text-[#E8931A] text-xs font-medium px-3 py-1.5 rounded-full border border-[#E8931A]/20 shrink-0"
-              >
+              <span key={i} className="inline-block bg-[#FFF8ED] text-[#E8931A] text-xs font-medium px-3 py-1.5 rounded-full border border-[#E8931A]/20 shrink-0">
                 {name}
               </span>
             ))}
