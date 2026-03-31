@@ -3,6 +3,7 @@ interface ContactFormData {
   nom: string;
   email: string;
   telephone?: string;
+  destination: string;
   niveauEtudes: string;
   filieresSouhaitee: string;
   niveauAnglais?: string;
@@ -13,6 +14,7 @@ interface ContactFormData {
 
 export function buildAdminEmailHtml(data: ContactFormData): string {
   const rows = [
+    ['Destination souhaitée', data.destination],
     ['Prénom', data.prenom],
     ['Nom', data.nom],
     ['Email', data.email],
@@ -82,11 +84,12 @@ export function buildConfirmationEmailHtml(data: ContactFormData): string {
         Bonjour <strong style="color: #1A3A8F;">${data.prenom}</strong>,
       </p>
       <p style="color: #555555; font-size: 15px; line-height: 1.7;">
-        Nous avons bien reçu votre demande d'orientation pour étudier en Chine. Notre équipe d'experts va analyser votre profil et vous recontactera <strong>sous 24h ouvrées</strong>.
+        Nous avons bien reçu votre demande d'orientation. Notre équipe d'experts va analyser votre profil et vous recontactera <strong>sous 24h ouvrées</strong>.
       </p>
       <div style="background: #EEF3FF; border-radius: 12px; padding: 20px; margin: 24px 0;">
         <p style="color: #1A3A8F; font-weight: 600; margin: 0 0 12px 0; font-size: 15px;">📋 Récapitulatif de votre demande :</p>
         <ul style="color: #555555; margin: 0; padding-left: 20px; font-size: 14px; line-height: 2;">
+          <li>Destination souhaitée : <strong>${data.destination}</strong></li>
           <li>Niveau d'études : <strong>${data.niveauEtudes}</strong></li>
           <li>Filière souhaitée : <strong>${data.filieresSouhaitee}</strong></li>
           <li>Année de départ : <strong>${data.anneeDepart}</strong></li>

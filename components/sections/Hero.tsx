@@ -43,7 +43,7 @@ export default function Hero() {
           >
             {/* Eyebrow */}
             <p className="text-[#E8931A] text-sm font-medium uppercase tracking-widest mb-4">
-              Bureau d&apos;Orientation Officiel • Paris
+              Spécialiste des études en Chine et à l&apos;international • Paris
             </p>
 
             {/* H1 */}
@@ -54,7 +54,7 @@ export default function Hero() {
 
             {/* Subtitle */}
             <p className="text-white/80 text-xl mt-4 max-w-2xl leading-relaxed">
-              Bourses obtenues, placement garanti, accompagnement personnalisé — de Paris à votre université en Chine.
+              Bourses obtenues, placement garanti, accompagnement personnalisé — expert Chine avec ouverture vers les meilleures destinations internationales.
             </p>
 
             {/* Stats */}

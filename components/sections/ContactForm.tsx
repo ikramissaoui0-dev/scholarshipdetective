@@ -14,6 +14,7 @@ const schema = z.object({
   nom: z.string().min(2, 'Nom requis (min. 2 caractères)'),
   email: z.string().email('Adresse email invalide'),
   telephone: z.string().optional(),
+  destination: z.string().min(1, 'Veuillez sélectionner une destination'),
   niveauEtudes: z.string().min(1, 'Veuillez sélectionner votre niveau'),
   filieresSouhaitee: z.string().min(3, 'Filière requise (min. 3 caractères)'),
   niveauAnglais: z.string().optional(),
@@ -43,7 +44,7 @@ export default function ContactForm() {
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { rgpd: false },
+    defaultValues: { rgpd: false, destination: 'Chine' },
   });
 
   const onSubmit = async (data: FormData) => {
@@ -89,7 +90,7 @@ export default function ContactForm() {
             Obtenir Mon Orientation Gratuite
           </h2>
           <p className="text-[#E8931A] text-lg font-medium">
-            Réponse sous 24h — Sans engagement — Consultation offerte
+            Chine ou international — Réponse sous 24h — Sans engagement
           </p>
         </motion.div>
 
@@ -103,6 +104,33 @@ export default function ContactForm() {
           <form onSubmit={handleSubmit(onSubmit)} noValidate aria-label="Formulaire de contact">
             {/* Honeypot */}
             <input type="text" {...register('website')} style={{ display: 'none' }} tabIndex={-1} aria-hidden="true" />
+
+            {/* Destination */}
+            <div className="mb-4">
+              <label htmlFor="destination" className={labelClass}>
+                Destination souhaitée <span className="text-red-500" aria-hidden="true">*</span>
+              </label>
+              <select
+                id="destination"
+                className={inputClass}
+                aria-describedby={errors.destination ? 'destination-error' : undefined}
+                aria-required="true"
+                {...register('destination')}
+              >
+                <option value="Chine">🇨🇳 Chine (recommandé)</option>
+                <option value="France">🇫🇷 France</option>
+                <option value="Espagne">🇪🇸 Espagne</option>
+                <option value="Allemagne">🇩🇪 Allemagne</option>
+                <option value="Royaume-Uni">🇬🇧 Royaume-Uni</option>
+                <option value="Malte">🇲🇹 Malte</option>
+                <option value="Dubaï">🇦🇪 Dubaï</option>
+                <option value="Australie">🇦🇺 Australie</option>
+                <option value="USA">🇺🇸 USA</option>
+              </select>
+              {errors.destination && (
+                <p id="destination-error" className={errorClass} role="alert">{errors.destination.message}</p>
+              )}
+            </div>
 
             {/* Prénom / Nom */}
             <div className="grid sm:grid-cols-2 gap-4 mb-4">
@@ -268,7 +296,7 @@ export default function ContactForm() {
               <textarea
                 id="message"
                 rows={4}
-                placeholder="Décrivez votre projet d'études en Chine..."
+                placeholder="Décrivez votre projet d'études (destination, objectifs, questions...)..."
                 className={`${inputClass} resize-none`}
                 aria-describedby={errors.message ? 'message-error' : undefined}
                 {...register('message')}

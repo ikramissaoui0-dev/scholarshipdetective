@@ -7,6 +7,8 @@ import Services from '@/components/sections/Services';
 import HowItWorks from '@/components/sections/HowItWorks';
 import Universities from '@/components/sections/Universities';
 import Scholarships from '@/components/sections/Scholarships';
+import InternationalDestinations from '@/components/sections/InternationalDestinations';
+import InternationalSchools from '@/components/sections/InternationalSchools';
 import FAQ from '@/components/sections/FAQ';
 import ContactForm from '@/components/sections/ContactForm';
 
@@ -30,20 +32,26 @@ export default function Home() {
         {/* S06 — Comment ça Marche */}
         <HowItWorks />
 
-        {/* S07 — Universités Partenaires */}
+        {/* S07 — Universités Partenaires (Chine) */}
         <Universities />
 
-        {/* S08 — Bourses Disponibles */}
+        {/* S08 — Bourses Disponibles (Chine) */}
         <Scholarships />
 
-        {/* S10 — FAQ */}
+        {/* S09 — Destinations Internationales */}
+        <InternationalDestinations />
+
+        {/* S10 — Établissements Partenaires Internationaux */}
+        <InternationalSchools />
+
+        {/* S11 — FAQ */}
         <FAQ />
 
-        {/* S11 — Formulaire de Contact */}
+        {/* S12 — Formulaire de Contact */}
         <ContactForm />
       </main>
 
-      {/* S12 — Footer */}
+      {/* S13 — Footer */}
       <Footer />
     </>
   );

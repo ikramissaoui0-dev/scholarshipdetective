@@ -16,6 +16,13 @@ const universityLinks = [
   { label: 'Toutes nos universités', href: '#universites' },
 ];
 
+const internationalLinks = [
+  { label: 'France', href: '#international' },
+  { label: 'Espagne & Malte', href: '#international' },
+  { label: 'Royaume-Uni', href: '#international' },
+  { label: 'Dubaï & Australie', href: '#international' },
+];
+
 const resourceLinks = [
   { label: 'Bourse CSC', href: '#bourses' },
   { label: 'Bourses Provinciales', href: '#bourses' },
@@ -42,9 +49,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top border */}
         <div className="border-t border-white/10 pt-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
             {/* Brand column */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 md:col-span-2">
               <Link href="#hero" className="inline-block mb-4">
                 <span className="inline-block bg-white rounded-xl px-3 py-1.5">
                 <Image
@@ -57,7 +64,7 @@ export default function Footer() {
               </span>
               </Link>
               <p className="text-white/60 text-sm leading-relaxed mb-4">
-                Votre passerelle vers les universités chinoises
+                Expert Chine • Ouverture internationale
               </p>
               <a
                 href="mailto:secretariat@scholarshipdetective.fr"
@@ -106,10 +113,29 @@ export default function Footer() {
             {/* Universities */}
             <div>
               <h3 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">
-                Universités
+                Universités Chine
               </h3>
               <ul className="space-y-2">
                 {universityLinks.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-white/60 hover:text-[#E8931A] text-sm transition-colors duration-200"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* International */}
+            <div>
+              <h3 className="text-white font-semibold text-sm mb-4 uppercase tracking-wider">
+                International
+              </h3>
+              <ul className="space-y-2">
+                {internationalLinks.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}

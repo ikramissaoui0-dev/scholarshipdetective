@@ -10,7 +10,7 @@ const navLinks = [
   { label: 'Comment ça Marche', href: '#processus' },
   { label: 'Universités', href: '#universites' },
   { label: 'Bourses', href: '#bourses' },
-  { label: 'Témoignages', href: '#temoignages' },
+  { label: 'International', href: '#international' },
   { label: 'FAQ', href: '#faq' },
 ];
 

@@ -34,6 +34,7 @@ const contactSchema = z.object({
   nom: z.string().min(2).max(100),
   email: z.string().email().max(255),
   telephone: z.string().max(30).optional(),
+  destination: z.string().min(1).max(50),
   niveauEtudes: z.string().min(1).max(20),
   filieresSouhaitee: z.string().min(3).max(200),
   niveauAnglais: z.string().max(30).optional(),
