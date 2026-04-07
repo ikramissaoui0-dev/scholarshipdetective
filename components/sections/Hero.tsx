@@ -49,7 +49,7 @@ export default function Hero() {
             {/* H1 */}
             <h1 className="text-white font-bold text-5xl md:text-6xl lg:text-7xl leading-tight mb-6">
               Étudiez dans les Meilleures{' '}
-              <span className="text-[#E8931A]">Universités</span> de Chine
+              <span className="text-[#E8931A]">Universités</span> à l&apos;International
             </h1>
 
             {/* Subtitle */}
