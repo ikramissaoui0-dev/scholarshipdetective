@@ -3,14 +3,16 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 
+// href commençant par '/' → navigation route ; '#' → scroll ancre
 const navLinks = [
   { label: 'Nos Services', href: '#services' },
   { label: 'Comment ça Marche', href: '#processus' },
-  { label: 'Universités', href: '#universites' },
+  { label: '🇨🇳 Universités Chine', href: '/universites-chine' },
   { label: 'Bourses', href: '#bourses' },
-  { label: 'International', href: '#international' },
+  { label: '🌍 International', href: '/universites-international' },
   { label: 'FAQ', href: '#faq' },
 ];
 
@@ -18,6 +20,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +34,12 @@ export default function Header() {
 
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
+    // Lien de route (page dédiée)
+    if (href.startsWith('/')) {
+      router.push(href);
+      return;
+    }
+    // Lien ancre (scroll smooth)
     const el = document.querySelector(href);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });

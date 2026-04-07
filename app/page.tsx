@@ -5,10 +5,8 @@ import TrustBar from '@/components/sections/TrustBar';
 import ProblemSolution from '@/components/sections/ProblemSolution';
 import Services from '@/components/sections/Services';
 import HowItWorks from '@/components/sections/HowItWorks';
-import Universities from '@/components/sections/Universities';
+import UniversitiesTabs from '@/components/sections/UniversitiesTabs';
 import Scholarships from '@/components/sections/Scholarships';
-import InternationalDestinations from '@/components/sections/InternationalDestinations';
-import InternationalSchools from '@/components/sections/InternationalSchools';
 import FAQ from '@/components/sections/FAQ';
 import ContactForm from '@/components/sections/ContactForm';
 
@@ -32,17 +30,11 @@ export default function Home() {
         {/* S06 — Comment ça Marche */}
         <HowItWorks />
 
-        {/* S07 — Universités Partenaires (Chine) */}
-        <Universities />
+        {/* S07 — Universités (Chine / International) */}
+        <UniversitiesTabs />
 
         {/* S08 — Bourses Disponibles (Chine) */}
         <Scholarships />
-
-        {/* S09 — Destinations Internationales */}
-        <InternationalDestinations />
-
-        {/* S10 — Établissements Partenaires Internationaux */}
-        <InternationalSchools />
 
         {/* S11 — FAQ */}
         <FAQ />
