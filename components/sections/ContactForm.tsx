@@ -132,7 +132,7 @@ export default function ContactForm() {
                 aria-required="true"
                 {...register('destination')}
               >
-                <option value="Chine">🇨🇳 Chine (recommandé)</option>
+                <option value="Chine">🇨🇳 Chine</option>
                 <option value="France">🇫🇷 France</option>
                 <option value="Espagne">🇪🇸 Espagne</option>
                 <option value="Allemagne">🇩🇪 Allemagne</option>
