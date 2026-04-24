@@ -37,6 +37,21 @@ export default function ContactForm() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverError, setServerError] = useState('');
+  const [interesseParRdv, setInteresseParRdv] = useState<'oui' | 'non' | ''>('');
+  const [calendlyLoaded, setCalendlyLoaded] = useState(false);
+
+  const loadCalendly = () => {
+    if (calendlyLoaded) return;
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.head.appendChild(script);
+    setCalendlyLoaded(true);
+    console.log('[Tracking] Calendly widget ouvert — candidat intéressé par un RDV');
+    if (typeof window !== 'undefined' && (window as { gtag?: (...args: unknown[]) => void }).gtag) {
+      (window as { gtag?: (...args: unknown[]) => void }).gtag!('event', 'calendly_open', { event_category: 'Contact' });
+    }
+  };
 
   const {
     register,
@@ -58,7 +73,7 @@ export default function ContactForm() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, interesseParRdv: interesseParRdv || 'non_repondu' }),
       });
 
       const json = await res.json();
@@ -303,6 +318,51 @@ export default function ContactForm() {
               />
               {errors.message && (
                 <p id="message-error" className={errorClass} role="alert">{errors.message.message}</p>
+              )}
+            </div>
+
+            {/* Option RDV Calendly */}
+            <div className="mb-6 p-4 bg-[#F0F4FF] border border-[#1A3A8F]/20 rounded-xl">
+              <p className="text-sm font-semibold text-[#1A1A2E] mb-1">
+                Souhaitez-vous réserver un créneau dès maintenant pour un échange rapide ?
+              </p>
+              <p className="text-xs text-[#E8931A] font-medium mb-3">
+                ⚡ Les candidats qui réservent un appel sont traités en priorité.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="rdv"
+                    value="oui"
+                    checked={interesseParRdv === 'oui'}
+                    onChange={() => { setInteresseParRdv('oui'); loadCalendly(); }}
+                    className="accent-[#1A3A8F] w-4 h-4"
+                  />
+                  <span className="text-sm text-[#1A1A2E]">Oui, je veux réserver maintenant</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="rdv"
+                    value="non"
+                    checked={interesseParRdv === 'non'}
+                    onChange={() => setInteresseParRdv('non')}
+                    className="accent-[#1A3A8F] w-4 h-4"
+                  />
+                  <span className="text-sm text-[#1A1A2E]">Non, je préfère plus tard</span>
+                </label>
+              </div>
+
+              {/* Widget Calendly inline conditionnel */}
+              {interesseParRdv === 'oui' && (
+                <div className="mt-4">
+                  <div
+                    className="calendly-inline-widget rounded-xl overflow-hidden"
+                    data-url="https://calendly.com/secretariat-scholarshipdetective/30min"
+                    style={{ minWidth: '100%', height: '630px' }}
+                  />
+                </div>
               )}
             </div>
 

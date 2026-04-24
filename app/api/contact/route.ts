@@ -43,6 +43,7 @@ const contactSchema = z.object({
   message: z.string().max(500).optional(),
   rgpd: z.boolean().refine((v) => v === true),
   website: z.string().optional(), // Honeypot
+  interesseParRdv: z.enum(['oui', 'non', 'non_repondu']).optional(),
 });
 
 export async function POST(req: NextRequest) {
